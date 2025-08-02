@@ -6,11 +6,11 @@ import com.example.my_books_backend.dto.book.BookResponse;
 
 public interface BookService {
     /**
-     * 書籍一覧取得
+     * 最新の書籍リスト（１０冊）
      * 
-     * @return 最新の書籍リスト
+     * @return 書籍リスト
      */
-    List<BookResponse> getBooks();
+    List<BookResponse> getTop10RecentBooks();
 
     /**
      * タイトルで書籍を検索したリストを取得

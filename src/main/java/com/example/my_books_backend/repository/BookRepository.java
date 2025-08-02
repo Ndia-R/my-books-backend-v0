@@ -9,8 +9,8 @@ import com.example.my_books_backend.entity.Book;
 
 @Repository
 public interface BookRepository extends JpaRepository<Book, String> {
-    // 書籍一覧取得
-    List<Book> findByIsDeletedFalse();
+    // 最新の書籍リスト（１０冊）
+    List<Book> findTop10ByIsDeletedFalseOrderByPublicationDateDesc();
 
     // タイトル検索
     List<Book> findByTitleContainingAndIsDeletedFalse(String keyword);

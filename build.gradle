@@ -30,16 +30,13 @@ bootJar{
 
 dependencies {
 	// Spring Boot Starters
-	implementation 'org.springframework.boot:spring-boot-starter-cache'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	// implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	
 	// External Libraries
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0'
 	implementation 'org.mapstruct:mapstruct:1.5.5.Final'
-	implementation 'com.auth0:java-jwt:4.4.0'
 	
 	// Compile Only
 	compileOnly 'org.projectlombok:lombok'

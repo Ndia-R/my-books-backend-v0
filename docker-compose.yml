@@ -16,6 +16,7 @@ services:
       SPRINGDOC_SWAGGER_UI_URL: ${SWAGGER_UI_URL}
     volumes:
       - .:/workspace
+      - gradle-cache:/home/vscode/.gradle
     depends_on:
       db:
         condition: service_healthy
@@ -47,3 +48,4 @@ services:
 
 volumes:
   db_data:
+  gradle-cache:

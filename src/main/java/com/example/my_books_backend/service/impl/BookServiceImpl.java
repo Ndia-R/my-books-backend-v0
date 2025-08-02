@@ -5,17 +5,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.example.my_books_backend.dto.genre.GenreResponse;
 import com.example.my_books_backend.dto.book.BookDetailsResponse;
 import com.example.my_books_backend.dto.book.BookResponse;
 import com.example.my_books_backend.entity.Book;
-import com.example.my_books_backend.entity.Genre;
 import com.example.my_books_backend.exception.BadRequestException;
 import com.example.my_books_backend.exception.NotFoundException;
 import com.example.my_books_backend.mapper.BookMapper;
 import com.example.my_books_backend.repository.BookRepository;
 import com.example.my_books_backend.service.BookService;
-import com.example.my_books_backend.service.GenreService;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -25,14 +22,12 @@ public class BookServiceImpl implements BookService {
     private final BookRepository bookRepository;
     private final BookMapper bookMapper;
 
-    private final GenreService genreService;
-
     /**
      * {@inheritDoc}
      */
     @Override
-    public List<BookResponse> getBooks() {
-        List<Book> books = bookRepository.findByIsDeletedFalse();
+    public List<BookResponse> getTop10RecentBooks() {
+        List<Book> books = bookRepository.findTop10ByIsDeletedFalseOrderByPublicationDateDesc();
         return bookMapper.toBookResponseList(books);
     }
 
@@ -77,15 +72,7 @@ public class BookServiceImpl implements BookService {
     public BookDetailsResponse getBookDetails(String id) {
         Book book = bookRepository.findById(id)
             .orElseThrow(() -> new NotFoundException("Book not found"));
-
-        List<Long> bookGenreIds = book.getGenres().stream().map(Genre::getId).collect(Collectors.toList());
-
-        List<GenreResponse> relevantGenres = genreService.getGenresByIds(bookGenreIds);
-
-        BookDetailsResponse response = bookMapper.toBookDetailsResponse(book);
-        response.setGenres(relevantGenres);
-
-        return response;
+        return bookMapper.toBookDetailsResponse(book);
     }
 
     // ----プライベートメソッド----

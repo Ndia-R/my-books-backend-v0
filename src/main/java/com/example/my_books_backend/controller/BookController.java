@@ -25,8 +25,8 @@ public class BookController {
 
     @Operation(description = "最新の書籍リスト（１０冊）")
     @GetMapping("/new-releases")
-    public ResponseEntity<List<BookResponse>> getLatestBooks() {
-        List<BookResponse> response = bookService.getBooks();
+    public ResponseEntity<List<BookResponse>> getTop10RecentBooks() {
+        List<BookResponse> response = bookService.getTop10RecentBooks();
         return ResponseEntity.ok(response);
     }
 

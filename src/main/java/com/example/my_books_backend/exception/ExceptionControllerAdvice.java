@@ -42,54 +42,6 @@ public class ExceptionControllerAdvice extends ResponseEntityExceptionHandler {
         );
     }
 
-    @ExceptionHandler({ ValidationException.class })
-    public ResponseEntity<Object> handleBadRequest(ValidationException ex, WebRequest request) {
-        ErrorResponse errorResponse = new ErrorResponse(ex.getMessage(), HttpStatus.BAD_REQUEST);
-        return this.handleExceptionInternal(
-            ex,
-            errorResponse,
-            new HttpHeaders(),
-            HttpStatus.BAD_REQUEST,
-            request
-        );
-    }
-
-    @ExceptionHandler({ ConflictException.class })
-    public ResponseEntity<Object> handleConflict(ConflictException ex, WebRequest request) {
-        ErrorResponse errorResponse = new ErrorResponse(ex.getMessage(), HttpStatus.CONFLICT);
-        return this.handleExceptionInternal(
-            ex,
-            errorResponse,
-            new HttpHeaders(),
-            HttpStatus.CONFLICT,
-            request
-        );
-    }
-
-    @ExceptionHandler({ UnauthorizedException.class })
-    public ResponseEntity<Object> handleUnauthorized(UnauthorizedException ex, WebRequest request) {
-        ErrorResponse errorResponse = new ErrorResponse(ex.getMessage(), HttpStatus.UNAUTHORIZED);
-        return this.handleExceptionInternal(
-            ex,
-            errorResponse,
-            new HttpHeaders(),
-            HttpStatus.UNAUTHORIZED,
-            request
-        );
-    }
-
-    @ExceptionHandler({ ForbiddenException.class })
-    public ResponseEntity<Object> handleForbidden(ForbiddenException ex, WebRequest request) {
-        ErrorResponse errorResponse = new ErrorResponse(ex.getMessage(), HttpStatus.FORBIDDEN);
-        return this.handleExceptionInternal(
-            ex,
-            errorResponse,
-            new HttpHeaders(),
-            HttpStatus.FORBIDDEN,
-            request
-        );
-    }
-
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(
         @NonNull MethodArgumentNotValidException ex,
