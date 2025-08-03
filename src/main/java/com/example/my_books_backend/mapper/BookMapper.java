@@ -10,7 +10,7 @@ import com.example.my_books_backend.dto.book.BookDetailsResponse;
 import com.example.my_books_backend.entity.Book;
 import com.example.my_books_backend.entity.Genre;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = { GenreMapper.class })
 public interface BookMapper {
 
     @Mapping(target = "genreIds", source = "genres", qualifiedByName = "genresToIds")
@@ -20,6 +20,7 @@ public interface BookMapper {
     List<BookResponse> toBookResponseList(List<Book> books);
 
     @Mapping(target = "authors", source = "authors", qualifiedByName = "splitAuthors")
+    @Mapping(target = "genres", source = "genres")
     BookDetailsResponse toBookDetailsResponse(Book book);
 
     @Named("genresToIds")
